@@ -1,0 +1,11 @@
+# IntelliJ IDEA
+.idea/*
+!.idea/runConfigurations
+*.iml
+
+# Maven
+target/
+
+# Sandbox
+.sandbox/*
+!.sandbox/Dockerfile

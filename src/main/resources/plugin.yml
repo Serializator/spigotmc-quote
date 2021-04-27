@@ -1,0 +1,4 @@
+main: io.serializator.quote.Quote
+name: ${project.name}
+version: ${version}
+description: ${project.description}
