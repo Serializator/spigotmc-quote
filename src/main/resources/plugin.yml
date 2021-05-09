@@ -2,3 +2,6 @@ main: io.serializator.quote.Quote
 name: ${project.name}
 version: ${version}
 description: ${project.description}
+permissions:
+  quote.quote:
+    description: Allows the player to quote a message

@@ -24,8 +24,19 @@ public class AsyncPlayerChatListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onAsyncPlayerChat(AsyncPlayerChatEvent event) {
-        TextComponent quoted = createClickableChatComponent(event.getPlayer(), event.getMessage(), event.getFormat());
-        event.getRecipients().forEach(recipient -> recipient.spigot().sendMessage(quoted));
+        Player player = event.getPlayer();
+        String message = event.getMessage();
+        String format = event.getFormat();
+        TextComponent quoted = createClickableChatComponent(player, message, format);
+
+        event.getRecipients().forEach(recipient -> {
+            if (canQuote(recipient)) {
+                recipient.spigot().sendMessage(quoted);
+            } else {
+                recipient.sendMessage(String.format(format, player.getDisplayName(), message));
+            }
+        });
+
         event.setCancelled(true);
     }
 
@@ -52,5 +63,15 @@ public class AsyncPlayerChatListener implements Listener {
     private String getQuoteFromMessage(String message) {
         String format = config.getQuoteFormat();
         return format.replace("%message%", message);
+    }
+
+    /**
+     * Check if the recipient of a message can quote the message
+     *
+     * @param recipient the recipient to check
+     * @return true if the recipient can quote the message, false otherwise
+     */
+    private boolean canQuote(Player recipient) {
+        return recipient.hasPermission("quote.quote");
     }
 }
