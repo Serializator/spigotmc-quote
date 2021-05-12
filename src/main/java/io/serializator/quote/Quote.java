@@ -23,6 +23,6 @@ public class Quote extends JavaPlugin {
      */
     private Config initializeConfig() {
         saveDefaultConfig();
-        return new Config(this);
+        return new Config(getConfig(), getLogger());
     }
 }
