@@ -20,19 +20,18 @@ public class Config {
         this.logger = logger;
     }
 
+    public final void validate() {
+        if (!config.contains("quote-format")) {
+            logger.warning("\"quote-format\" is not configured, using the default quote format");
+        }
+    }
+
     /**
      * Get the format in which a quoted message is to be formatted
      *
      * @return the format in which a quote message is to be formatted
      */
     public final String getQuoteFormat() {
-        String format = config.getString("quote-format", null);
-
-        if (format == null) {
-            format = DEFAULT_FORMAT;
-            logger.warning("\"quote-format\" is not configured, using the default quote format");
-        }
-
-        return format;
+        return config.getString("quote-format", DEFAULT_FORMAT);
     }
 }

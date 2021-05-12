@@ -1,7 +1,10 @@
 package io.serializator.quote;
 
 import io.serializator.quote.listener.AsyncPlayerChatListener;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
 
 /**
  * A plugin which allows players to "quote" others in chat by clicking on their message
@@ -23,6 +26,8 @@ public class Quote extends JavaPlugin {
      */
     private Config initializeConfig() {
         saveDefaultConfig();
-        return new Config(getConfig(), getLogger());
+        Config config = new Config(YamlConfiguration.loadConfiguration(new File(getDataFolder(), "config.yml")), getLogger());
+        config.validate();
+        return config;
     }
 }
