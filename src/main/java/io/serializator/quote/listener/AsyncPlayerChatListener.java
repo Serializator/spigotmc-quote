@@ -60,7 +60,7 @@ public class AsyncPlayerChatListener implements Listener {
      * @param message the message to format as a quote
      * @return the message formatted as a quote
      */
-    private String getQuoteFromMessage(String message) {
+    String getQuoteFromMessage(String message) {
         String format = config.getQuoteFormat();
         return format.replace("%message%", message);
     }
